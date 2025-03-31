@@ -1,5 +1,6 @@
 package com.example.bmiator;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     EditText weightInput, heightInput;
     Button calculateButton;
     TextView bmiResult, bmiStatus;
+    Button openCalorieCalculatorButton;
 
     /**
      * Initializes the activity and sets up UI element bindings and button listener.
@@ -41,11 +43,19 @@ public class MainActivity extends AppCompatActivity {
         calculateButton = findViewById(R.id.calculateButton);
         bmiResult = findViewById(R.id.bmiResult);
         bmiStatus = findViewById(R.id.bmiStatus);
+        openCalorieCalculatorButton = findViewById(R.id.openCalorieCalculatorButton);
 
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 calculateBMI();
+            }
+        });
+        openCalorieCalculatorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CalorieIntakeCalculatorActivity.class);
+                startActivity(intent);
             }
         });
     }
