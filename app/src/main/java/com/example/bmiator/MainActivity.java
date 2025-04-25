@@ -10,16 +10,16 @@ import androidx.appcompat.app.AppCompatActivity;
 /**
  * BMI Calculator App
  * Author: Maksymilian Mrówka
- *
+ * <p>
  * This is a simple Android application that calculates the Body Mass Index (BMI)
  * based on the user's weight (in kilograms) and height (in centimeters).
- *
+ * <p>
  * How to run this app:
  * 1. Open the project in Android Studio.
  * 2. Make sure Gradle is synced (File > Sync Project with Gradle Files).
  * 3. Connect a real Android device or start an emulator.
  * 4. Click "Run" to install and launch the app.
- *
+ * <p>
  * On launch, the user can enter weight and height, and press "Calculate BMI".
  * The app will display the BMI value and a status (Underweight, Optimal, Overweight, Obesity).
  */
@@ -87,21 +87,34 @@ public class MainActivity extends AppCompatActivity {
             float bmi = weight / (heightM * heightM);
             bmiResult.setText("Your BMI: " + String.format("%.2f", bmi));
 
-            String status;
-            if (bmi < 18.5) {
-                status = "Underweight";
-            } else if (bmi < 25) {
-                status = "Optimal";
-            } else if (bmi < 30) {
-                status = "Overweight";
-            } else {
-                status = "Obesity";
-            }
+            String status = calculateBmiStatus(weight, heightCm);
 
             bmiStatus.setText("Status: " + status);
 
         } catch (NumberFormatException e) {
             Toast.makeText(this, "Please enter valid numeric values", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Calculates the BMI (Body Mass Index) status based on weight in kilograms and height in centimeters.
+     */
+    public static String calculateBmiStatus(float weight, float heightCm) {
+        if (weight <= 0 || heightCm <= 0) {
+            return "Error";
+        }
+
+        float heightM = heightCm / 100;
+        float bmi = weight / (heightM * heightM);
+
+        if (bmi < 18.5f) {
+            return "Underweight";
+        } else if (bmi < 25f) {
+            return "Optimal";
+        } else if (bmi < 30f) {
+            return "Overweight";
+        } else {
+            return "Obesity";
         }
     }
 }
