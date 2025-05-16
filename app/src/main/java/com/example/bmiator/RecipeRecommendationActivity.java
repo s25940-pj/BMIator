@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bmiator.model.Recipe;
+import com.example.bmiator.model.ShoppingItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +19,8 @@ import java.util.List;
 public class RecipeRecommendationActivity extends AppCompatActivity {
 
     TextView recipeText;
+    RecyclerView shoppingListRecyclerView;
+    ShoppingListAdapter shoppingListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +28,7 @@ public class RecipeRecommendationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_recommendation);
 
         recipeText = findViewById(R.id.recipeText);
+        shoppingListRecyclerView = findViewById(R.id.shoppingListRecyclerView);
 
         List<Recipe> recipes = getRecommendedRecipes();
         StringBuilder builder = new StringBuilder();
@@ -35,6 +41,11 @@ public class RecipeRecommendationActivity extends AppCompatActivity {
         }
 
         recipeText.setText(builder.toString());
+
+
+        shoppingListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        shoppingListAdapter = new ShoppingListAdapter(getShoppingItems());
+        shoppingListRecyclerView.setAdapter(shoppingListAdapter);
     }
 
     private List<Recipe> getRecommendedRecipes() {
@@ -53,5 +64,17 @@ public class RecipeRecommendationActivity extends AppCompatActivity {
                 "Vegan"));
 
         return list;
+    }
+
+    private List<ShoppingItem> getShoppingItems() {
+        List<ShoppingItem> items = new ArrayList<>();
+
+        items.add(new ShoppingItem("3 eggs"));
+        items.add(new ShoppingItem("Spinach"));
+        items.add(new ShoppingItem("Tomatoes"));
+        items.add(new ShoppingItem("Feta cheese"));
+        items.add(new ShoppingItem("Olive oil"));
+
+        return items;
     }
 }

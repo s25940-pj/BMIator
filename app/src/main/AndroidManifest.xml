@@ -28,6 +28,9 @@
         <activity android:name=".RecipeRecommendationActivity"
             android:exported="true">
         </activity>
+        <activity android:name=".BmiChartActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     Button calculateButton;
     TextView bmiResult, bmiStatus;
     Button openCalorieCalculatorButton;
+    Button openBmiChartButton;
 
     /**
      * Initializes the activity and sets up UI element bindings and button listener.
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         bmiResult = findViewById(R.id.bmiResult);
         bmiStatus = findViewById(R.id.bmiStatus);
         openCalorieCalculatorButton = findViewById(R.id.openCalorieCalculatorButton);
+        openBmiChartButton = findViewById(R.id.bmiChartButton);
 
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +57,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CalorieIntakeCalculatorActivity.class);
+                startActivity(intent);
+            }
+        });
+        openBmiChartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, BmiChartActivity.class);
                 startActivity(intent);
             }
         });
